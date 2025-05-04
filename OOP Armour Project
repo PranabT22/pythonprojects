@@ -1,0 +1,129 @@
+from abc import ABC, abstractmethod
+
+class Armour(ABC):
+    def __init__(self, materials, defense_value, toughness_value, durability):
+        self.__materials = materials 
+        self.__defense_value = defense_value
+        self.__toughness_value = toughness_value
+        self.__durability = durability
+        self.__protection = self.calculate_protection()
+    
+    def get_materials(self):
+        return self.__materials
+    
+    def get_defense_value(self):
+        return self.__defense_value
+    
+    def get_toughness_value(self):
+        return self.__toughness_value
+    
+    def get_durability(self):
+        return self.__durability
+    
+    def is_broken(self):
+        return self.__durability <= 0
+    
+    @abstractmethod
+    def calculate_protection(self):
+        pass
+
+    material = property(get_materials)
+
+    defense_value = property(get_defense_value)
+
+    toughness_value = property(get_toughness_value)
+    
+    durability = property(get_durability)
+
+    def reducing(self, amount):
+        self.__durability -= amount
+        if self.is_broken():
+            print(f"{self.__class__.__name__} is broken")
+        else:
+            print(f"{self.__class__.__name__} durability reduced to {self.__durability}.")
+    
+    def repairing_durability(self, amount):
+        self.__durability += amount
+        print(f"{self.__class__.__name__} durability increased to {self.__durability}.")
+    
+    def __str__(self):
+        return f"{self.__class__.__name__} is made from:\nMaterial: {self.__materials}\nDefense_value: {self.__defense_value}\nToughness: {self.__toughness_value}\nDurability: {self.__durability}"
+
+class Helmet(Armour):
+    def __init__(self, materials, defense_value, toughness_value, durability):
+        super().__init__(materials, defense_value, toughness_value, durability)
+    
+    def calculate_protection(self):
+        Armour_value = 0.5
+        if self.is_broken():
+            print(f"{self.__class__.__name__} is broken.")
+            return 0  # Return 0 protection if broken
+        else:
+            protection = self.get_defense_value() + (self.get_toughness_value() * Armour_value) 
+            return protection
+
+class ChestPlate(Armour):
+    def __init__(self, materials, defense_value, toughness_value, durability):
+        super().__init__(materials, defense_value, toughness_value, durability)
+
+    def calculate_protection(self):
+        Armour_value = 0.7
+        if self.is_broken():
+            print(f"{self.__class__.__name__} is broken")
+            return 0  # Return 0 protection if broken
+        else:
+            protection = self.get_defense_value() + (self.get_toughness_value() * Armour_value)
+            return protection
+
+class Leggings(Armour):
+    def __init__(self, materials, defense_value, toughness_value, durability):
+        super().__init__(materials, defense_value, toughness_value, durability)
+
+    def calculate_protection(self):
+        Armour_value = 0.7
+        if self.is_broken():
+            print(f"{self.__class__.__name__} is broken")
+            return 0  # Return 0 protection if broken
+        else:
+            protection = self.get_defense_value() + (self.get_toughness_value() * Armour_value)
+            return protection
+
+class Boots(Armour):
+    def __init__(self, materials, defense_value, toughness_value, durability):
+        super().__init__(materials, defense_value, toughness_value, durability)
+    
+    def calculate_protection(self):
+        Armour_value = 0.6
+        if self.is_broken():
+            print(f"{self.__class__.__name__} is broken.")
+            return 0  # Return 0 protection if broken
+        else:
+            protection = self.get_defense_value() + (self.get_toughness_value() * Armour_value)
+            return protection
+
+helmet1 = Helmet("Nether", 40, 25, 60)
+chest_plate1 = ChestPlate("DragonArmor", 500, 30, 100)
+leggings1 = Leggings("Leather", 5, 10, 30)
+boots1 = Boots("Diamond", 80, 40, 70)
+
+print('\n')
+print("*" * 40)
+print(helmet1)
+print(f"Current Protection: {helmet1.calculate_protection()}")
+helmet1.reducing(5)
+print(boots1)
+
+print("*" * 40)
+print(chest_plate1)
+print(f"Current Protection: {chest_plate1.calculate_protection()}")
+chest_plate1.reducing(5)
+print(boots1)
+
+print("*" * 40)
+print(leggings1)
+print(f"Current Protection: {leggings1.calculate_protection()}")
+leggings1.reducing(5)
+print(boots1)
+
+print("*" * 40)
+print(boots1)
