@@ -1,0 +1,120 @@
+from abc import ABC, abstractmethod
+from math import pi, sqrt
+class Shape(ABC):
+    def __init__(self, area):
+        self.__area = area
+    
+    def get_area(self):
+        return self.__area
+    
+    def set_area(self, new_area):
+        self.__area = new_area
+    
+    area = property(get_area, set_area)
+
+    @abstractmethod
+    def calculate_area(self):
+        pass
+
+    @abstractmethod
+    def scale(self, factor):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, area,width,height):
+        super().__init__(area)
+        self.___width = width
+        self.__height = height
+    
+    def calculate_area(self):
+        self.__area = self.__width = self.__height
+        return self.__area
+    
+    def calculate_perimeter(self):
+        perimeter = 2 *(self.__width + self.__height)
+        return perimeter
+    
+    def scale(self, factor):
+        self.__width *= factor
+        self.__height *= factor
+        area = self.__width * self.__height
+        self.set_area(area)
+    
+    def __str__(self):
+        return f"Shape: {self.__class__.__name__}\n"\
+                f"Area: {self.calculate_area()}\n"\
+                f"Perimeter: {self.calculate_perimeter()}"
+    
+class Circle(Shape):
+    def __init__(self, area, radius):
+        super().__init__(area)
+        self.__radius = radius
+    
+    def calculate_area(self):
+        self.__area = pi * self.__radius **2
+        return self.__area
+    
+    def calculate_perimeter(self):
+        perimeter = 2*pi*self.__radius
+        return perimeter
+
+    def scale(self,factor):
+        self.__radius *= factor
+        area = pi*self.__radius**2
+        self.set_area(area)
+
+    def __str__(self):
+        return f"Shape: {self.__class__.__name__}\n"\
+                f"Area: {self.calculate_area()}\n"\
+                f"Perimeter:{self.calculate_perimeter()}"
+
+class Triangle(Shape):
+    def __init__(self, area, hyp, opp, adj):
+        super().__init__(area)
+        self.__hyp = hyp
+        self.__opp = opp
+        self.__adj = adj
+    
+    def calculate_area(self):
+        sp = self.calculate_semi_perimeter()
+        self.__area = sqrt(sp * (sp - self.__hyp) * (sp - self.__adj) * (sp - self.__opp))
+        return self.__area
+    
+    def calculate_perimeter(self):
+        perimeter = self.__hyp + self.__adj + self.__opp
+        return perimeter
+    
+    def calculate_semi_perimeter(self):
+        sp = self.calculate_perimeter() / 2
+        return sp
+    
+    def scale(self, factor):
+        self.__adj *= factor
+        self.__opp *= factor
+        self.__hyp *= factor
+        self.set_area(self.calculate_area())
+
+    def __str__(self):
+        return f"Shape: {self.__class__.__name__}\n"\
+                f"Area: {self.calculate_area()}\n"\
+                f"Semi-perimeter: {self.calculate_semi_perimeter()}"
+
+circle1 = Circle(5, 10)
+print(circle1)
+circle1.scale(3)
+print(circle1)
+
+triangle1 = Triangle(1, 2, 3, 4)
+print(triangle1)
+triangle1.scale(3)
+print(triangle1)
+
+rectangle1 =  Rectangle( 16, 16, 16,)
+print(rectangle1)
+rectangle1.scale(3)
+print(rectangle1)
+
