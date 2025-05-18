@@ -1,1 +1,9 @@
+play
 
+pause 
+
+display song_details
+
+skip 
+
+shuffle
