@@ -1,0 +1,32 @@
+import random
+quotes_library = ["Until you value yourself, you will not value your time. Until you value your time, you will not do anything with it.",
+
+"I must govern the clock, not be governed by it.",
+
+"Your greatest asset is your earning ability. Your greatest resource is your time.",
+
+"Don’t wait. The time will never be just right.",
+
+"The secret of your future is hidden in your daily routine.",
+
+"Most people overestimate what they can accomplish in a year – and underestimate what they can achieve in a decade!!",
+
+"The best thing about the future is that it comes one day at a time.",
+
+"Time = life; therefore, waste your time and waste your life, or master your time and master your life.",
+
+"The most efficient way to live reasonably is every morning to make a plan of one’s day and every night to examine the results obtained.",
+
+"Don’t count every hour in the day. Make every hour in the day count.",
+
+"If you have time to whine and complain about something then you have the time to do something about it.",
+
+"Whether it’s the best of times or the worst of times, it’s the only time we’ve got.",
+
+"You can’t make up for lost time. You can only do better in the future.",
+
+"You will never ‘find’ time for anything. If you want time, you must make it.",
+
+"To think too long about doing a thing often becomes its undoing.",
+]
+generate_Quote = print(random.choice(quotes_library))
