@@ -1,1 +1,21 @@
+import random
 
+player1_score = 0
+computer_score = 0
+
+while player1_score < 20 and computer_score < 20:
+    player_die_roll = random.randint(1, 6)
+    player1_score += player_die_roll
+
+    computer_die_roll = random.randint(1, 6)
+    computer_score += computer_die_roll
+
+    print(f"Player rolled: {player_die_roll} | Total: {player1_score}")
+    print(f"Computer rolled: {computer_die_roll} | Total: {computer_score}\n")
+
+if player1_score >= 20 and computer_score < 20:
+    print("Player wins!")
+elif computer_score >= 20 and player1_score < 20:
+    print("Computer wins!")
+elif player1_score >= 20 and computer_score >= 20:
+    print("It's a tie!")
